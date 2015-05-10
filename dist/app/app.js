@@ -724,28 +724,28 @@ module.exports = invariant;
 'use strict';
 
 function ToObject(val) {
-	if (val == null) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
+  if (val == null) {
+    throw new TypeError('Object.assign cannot be called with null or undefined');
+  }
 
-	return Object(val);
+  return Object(val);
 }
 
 module.exports = Object.assign || function (target, source) {
-	var from;
-	var keys;
-	var to = ToObject(target);
+  var from;
+  var keys;
+  var to = ToObject(target);
 
-	for (var s = 1; s < arguments.length; s++) {
-		from = arguments[s];
-		keys = Object.keys(Object(from));
+  for (var s = 1; s < arguments.length; s++) {
+    from = arguments[s];
+    keys = Object.keys(Object(from));
 
-		for (var i = 0; i < keys.length; i++) {
-			to[keys[i]] = from[keys[i]];
-		}
-	}
+    for (var i = 0; i < keys.length; i++) {
+      to[keys[i]] = from[keys[i]];
+    }
+  }
 
-	return to;
+  return to;
 };
 
 },{}],8:[function(require,module,exports){
@@ -7147,41 +7147,41 @@ module.exports = exports['default'];
 */
 
 function classNames() {
-	var classes = '';
-	var arg;
+  var classes = '';
+  var arg;
 
-	for (var i = 0; i < arguments.length; i++) {
-		arg = arguments[i];
-		if (!arg) {
-			continue;
-		}
+  for (var i = 0; i < arguments.length; i++) {
+    arg = arguments[i];
+    if (!arg) {
+      continue;
+    }
 
-		if ('string' === typeof arg || 'number' === typeof arg) {
-			classes += ' ' + arg;
-		} else if (Object.prototype.toString.call(arg) === '[object Array]') {
-			classes += ' ' + classNames.apply(null, arg);
-		} else if ('object' === typeof arg) {
-			for (var key in arg) {
-				if (!arg.hasOwnProperty(key) || !arg[key]) {
-					continue;
-				}
-				classes += ' ' + key;
-			}
-		}
-	}
-	return classes.substr(1);
+    if ('string' === typeof arg || 'number' === typeof arg) {
+      classes += ' ' + arg;
+    } else if (Object.prototype.toString.call(arg) === '[object Array]') {
+      classes += ' ' + classNames.apply(null, arg);
+    } else if ('object' === typeof arg) {
+      for (var key in arg) {
+        if (!arg.hasOwnProperty(key) || !arg[key]) {
+          continue;
+        }
+        classes += ' ' + key;
+      }
+    }
+  }
+  return classes.substr(1);
 }
 
 // safely export classNames for node / browserify
 if (typeof module !== 'undefined' && module.exports) {
-	module.exports = classNames;
+  module.exports = classNames;
 }
 
 // safely export classNames for RequireJS
 if (typeof define !== 'undefined' && define.amd) {
-	define('classnames', [], function() {
-		return classNames;
-	});
+  define('classnames', [], function() {
+    return classNames;
+  });
 }
 
 },{}],71:[function(require,module,exports){
@@ -26982,21 +26982,21 @@ var AppConstants = require('../constants/AppConstants');
 var _dispatchToken = null;
 
 module.exports = {
-	dispatchToken: _dispatchToken,
+  dispatchToken: _dispatchToken,
 
-	addSpot: function addSpot(spot) {
-		_dispatchToken = AppDispatcher.handleViewAction({
-			type: AppConstants.ActionTypes.ADD_SPOT_TO_TRIP,
-			spot: spot
-		});
-	},
+  addSpot: function addSpot(spot) {
+    _dispatchToken = AppDispatcher.handleViewAction({
+      type: AppConstants.ActionTypes.ADD_SPOT_TO_TRIP,
+      spot: spot
+    });
+  },
 
-	removeSpot: function removeSpot(id) {
-		_dispatchToken = AppDispatcher.handleViewAction({
-			type: AppConstants.ActionTypes.REMOVE_SPOT_FROM_TRIP,
-			id: id
-		});
-	}
+  removeSpot: function removeSpot(id) {
+    _dispatchToken = AppDispatcher.handleViewAction({
+      type: AppConstants.ActionTypes.REMOVE_SPOT_FROM_TRIP,
+      id: id
+    });
+  }
 };
 
 },{"../constants/AppConstants":229,"../dispatchers/AppDispatcher":230}],228:[function(require,module,exports){
@@ -27017,69 +27017,69 @@ var Table = _require.Table;
 var Glyphicon = _require.Glyphicon;
 
 var styles = {
-	td: {
-		width: 20
-	}
+  td: {
+    width: 20
+  }
 };
 
 var App = React.createClass({ displayName: 'App',
 
-	getLatestData: function getLatestData() {
-		return {
-			spots: SpotStore.getAll(),
-			trip: TripStore.getCurrentTrip()
-		};
-	},
+  getLatestData: function getLatestData() {
+    return {
+      spots: SpotStore.getAll(),
+      trip: TripStore.getCurrentTrip()
+    };
+  },
 
-	_onChange: function _onChange() {
-		this.setState(this.getLatestData());
-	},
+  _onChange: function _onChange() {
+    this.setState(this.getLatestData());
+  },
 
-	getInitialState: function getInitialState() {
-		return this.getLatestData();
-	},
+  getInitialState: function getInitialState() {
+    return this.getLatestData();
+  },
 
-	componentWillMount: function componentWillMount() {
-		TripStore.addChangeListener(this._onChange);
-		SpotStore.addChangeListener(this._onChange);
-	},
+  componentWillMount: function componentWillMount() {
+    TripStore.addChangeListener(this._onChange);
+    SpotStore.addChangeListener(this._onChange);
+  },
 
-	componentWillUnmount: function componentWillUnmount() {
-		TripStore.removeChangeListener(this._onChange);
-		SpotStore.removeChangeListener(this._onChange);
-	},
+  componentWillUnmount: function componentWillUnmount() {
+    TripStore.removeChangeListener(this._onChange);
+    SpotStore.removeChangeListener(this._onChange);
+  },
 
-	addSpotToTrip: function addSpotToTrip(spot) {
-		SpotActions.addSpot(spot);
-	},
+  addSpotToTrip: function addSpotToTrip(spot) {
+    SpotActions.addSpot(spot);
+  },
 
-	removeSpotFromTrip: function removeSpotFromTrip(id) {
-		SpotActions.removeSpot(id);
-	},
+  removeSpotFromTrip: function removeSpotFromTrip(id) {
+    SpotActions.removeSpot(id);
+  },
 
-	renderSpots: function renderSpots() {
-		var that = this;
-		var spotElements = [];
-		_.each(this.state.spots, function (spot, index) {
-			spotElements.push(React.createElement('tr', { key: index }, React.createElement('td', null, React.createElement('b', null, spot.name)), React.createElement('td', { style: styles.td }, React.createElement(Button, { onClick: that.addSpotToTrip.bind(that, spot), className: 'right-aligned' }, 'add'))));
-		});
+  renderSpots: function renderSpots() {
+    var that = this;
+    var spotElements = [];
+    _.each(this.state.spots, function (spot, index) {
+      spotElements.push(React.createElement('tr', { key: index }, React.createElement('td', null, React.createElement('b', null, spot.name)), React.createElement('td', { style: styles.td }, React.createElement(Button, { onClick: that.addSpotToTrip.bind(that, spot), className: 'right-aligned' }, 'add'))));
+    });
 
-		return spotElements;
-	},
+    return spotElements;
+  },
 
-	renderTripSpots: function renderTripSpots() {
-		var that = this;
-		var tripSpotElements = [];
-		_.each(this.state.trip.spots, function (spot, index) {
-			tripSpotElements.push(React.createElement('tr', { key: index }, React.createElement('td', null, React.createElement('b', null, spot.name)), React.createElement('td', { style: styles.td }, React.createElement(Button, { onClick: that.removeSpotFromTrip.bind(that, spot.id), className: 'right-aligned' }, 'remove'))));
-		});
+  renderTripSpots: function renderTripSpots() {
+    var that = this;
+    var tripSpotElements = [];
+    _.each(this.state.trip.spots, function (spot, index) {
+      tripSpotElements.push(React.createElement('tr', { key: index }, React.createElement('td', null, React.createElement('b', null, spot.name)), React.createElement('td', { style: styles.td }, React.createElement(Button, { onClick: that.removeSpotFromTrip.bind(that, spot.id), className: 'right-aligned' }, 'remove'))));
+    });
 
-		return tripSpotElements;
-	},
+    return tripSpotElements;
+  },
 
-	render: function render() {
-		return React.createElement(Grid, null, React.createElement(Row, null, React.createElement(Col, { lg: 6 }, React.createElement(Table, { striped: true, bordered: true }, React.createElement('tbody', null, this.renderSpots()))), React.createElement(Col, { lg: 6 }, React.createElement(Table, { striped: true, bordered: true }, React.createElement('tbody', null, this.renderTripSpots())))));
-	}
+  render: function render() {
+    return React.createElement(Grid, null, React.createElement(Row, null, React.createElement(Col, { lg: 6 }, React.createElement(Table, { striped: true, bordered: true }, React.createElement('tbody', null, this.renderSpots()))), React.createElement(Col, { lg: 6 }, React.createElement(Table, { striped: true, bordered: true }, React.createElement('tbody', null, this.renderTripSpots())))));
+  }
 });
 
 module.exports = App;
@@ -27139,17 +27139,17 @@ var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
 module.exports = assign({}, EventEmitter.prototype, {
-	addChangeListener: function addChangeListener(callback) {
-		this.on(CHANGE_EVENT, callback);
-	},
+  addChangeListener: function addChangeListener(callback) {
+    this.on(CHANGE_EVENT, callback);
+  },
 
-	removeChangeListener: function removeChangeListener(callback) {
-		this.removeListener(CHANGE_EVENT, callback);
-	},
+  removeChangeListener: function removeChangeListener(callback) {
+    this.removeListener(CHANGE_EVENT, callback);
+  },
 
-	emitChange: function emitChange() {
-		this.emit(CHANGE_EVENT);
-	}
+  emitChange: function emitChange() {
+    this.emit(CHANGE_EVENT);
+  }
 });
 
 },{"events":2,"object-assign":7}],232:[function(require,module,exports){
@@ -27187,15 +27187,15 @@ AppDispatcher.register(function (payload) {
 
   // switch(action.type) {
   //   case AppConstants.ActionTypes.ADD_SPOT_TO_TRIP:
-  //   	_spots.push(action.spot)
+  //     _spots.push(action.spot)
   //     SpotStore.emitChange();
   //     break;
   //   case AppConstants.ActionTypes.REMOVE_SPOT_FROM_TRIP:
   //     _spots = _.remove(_spots, function(spot){
-  //     	return spot.id == action.id;
+  //       return spot.id == action.id;
   //     });
-  //    	SpotStore.emitChange();
-  //   	break;
+  //      SpotStore.emitChange();
+  //     break;
   // }
 });
 
@@ -27211,40 +27211,40 @@ var assign = require('object-assign');
 
 // Store vars
 var currentTrip = {
-	spots: []
+  spots: []
 };
 
 // Store is a object extend from BaseStore.
 var TripStore = assign({}, BaseStore, {
-	getCurrentTrip: function getCurrentTrip() {
-		return currentTrip;
-	}
+  getCurrentTrip: function getCurrentTrip() {
+    return currentTrip;
+  }
 });
 
 // To process Action here.
 AppDispatcher.register(function (payload) {
-	var action = payload.action;
+  var action = payload.action;
 
-	switch (action.type) {
-		case AppConstants.ActionTypes.ADD_SPOT_TO_TRIP:
-			var tripHasSpot = _.findIndex(currentTrip.spots, function (spot) {
-				return spot.id == action.spot.id;
-			}) != -1;
+  switch (action.type) {
+    case AppConstants.ActionTypes.ADD_SPOT_TO_TRIP:
+      var tripHasSpot = _.findIndex(currentTrip.spots, function (spot) {
+        return spot.id == action.spot.id;
+      }) != -1;
 
-			if (!tripHasSpot) {
-				currentTrip.spots.push(action.spot);
-				TripStore.emitChange();
-			}
-			break;
+      if (!tripHasSpot) {
+        currentTrip.spots.push(action.spot);
+        TripStore.emitChange();
+      }
+      break;
 
-		case AppConstants.ActionTypes.REMOVE_SPOT_FROM_TRIP:
-			_.remove(currentTrip.spots, function (spot) {
-				return action.id == spot.id;
-			});
-			TripStore.emitChange();
-			break;
+    case AppConstants.ActionTypes.REMOVE_SPOT_FROM_TRIP:
+      _.remove(currentTrip.spots, function (spot) {
+        return action.id == spot.id;
+      });
+      TripStore.emitChange();
+      break;
 
-	}
+  }
 });
 
 module.exports = TripStore;

@@ -724,28 +724,28 @@ module.exports = invariant;
 'use strict';
 
 function ToObject(val) {
-	if (val == null) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
+  if (val == null) {
+    throw new TypeError('Object.assign cannot be called with null or undefined');
+  }
 
-	return Object(val);
+  return Object(val);
 }
 
 module.exports = Object.assign || function (target, source) {
-	var from;
-	var keys;
-	var to = ToObject(target);
+  var from;
+  var keys;
+  var to = ToObject(target);
 
-	for (var s = 1; s < arguments.length; s++) {
-		from = arguments[s];
-		keys = Object.keys(Object(from));
+  for (var s = 1; s < arguments.length; s++) {
+    from = arguments[s];
+    keys = Object.keys(Object(from));
 
-		for (var i = 0; i < keys.length; i++) {
-			to[keys[i]] = from[keys[i]];
-		}
-	}
+    for (var i = 0; i < keys.length; i++) {
+      to[keys[i]] = from[keys[i]];
+    }
+  }
 
-	return to;
+  return to;
 };
 
 },{}],8:[function(require,module,exports){
@@ -1857,41 +1857,41 @@ module.exports = exports['default'];
 */
 
 function classNames() {
-	var classes = '';
-	var arg;
+  var classes = '';
+  var arg;
 
-	for (var i = 0; i < arguments.length; i++) {
-		arg = arguments[i];
-		if (!arg) {
-			continue;
-		}
+  for (var i = 0; i < arguments.length; i++) {
+    arg = arguments[i];
+    if (!arg) {
+      continue;
+    }
 
-		if ('string' === typeof arg || 'number' === typeof arg) {
-			classes += ' ' + arg;
-		} else if (Object.prototype.toString.call(arg) === '[object Array]') {
-			classes += ' ' + classNames.apply(null, arg);
-		} else if ('object' === typeof arg) {
-			for (var key in arg) {
-				if (!arg.hasOwnProperty(key) || !arg[key]) {
-					continue;
-				}
-				classes += ' ' + key;
-			}
-		}
-	}
-	return classes.substr(1);
+    if ('string' === typeof arg || 'number' === typeof arg) {
+      classes += ' ' + arg;
+    } else if (Object.prototype.toString.call(arg) === '[object Array]') {
+      classes += ' ' + classNames.apply(null, arg);
+    } else if ('object' === typeof arg) {
+      for (var key in arg) {
+        if (!arg.hasOwnProperty(key) || !arg[key]) {
+          continue;
+        }
+        classes += ' ' + key;
+      }
+    }
+  }
+  return classes.substr(1);
 }
 
 // safely export classNames for node / browserify
 if (typeof module !== 'undefined' && module.exports) {
-	module.exports = classNames;
+  module.exports = classNames;
 }
 
 // safely export classNames for RequireJS
 if (typeof define !== 'undefined' && define.amd) {
-	define('classnames', [], function() {
-		return classNames;
-	});
+  define('classnames', [], function() {
+    return classNames;
+  });
 }
 
 },{}],20:[function(require,module,exports){
